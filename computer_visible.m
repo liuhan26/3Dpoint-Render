@@ -1,7 +1,10 @@
 
-function [vis] = computer_visible(shape, face, proj_T)
-
-[normal, normalf] = compute_normal(shape, face);
+function [vis] = computer_visible(shape, face, proj_T, bita)
+T = ones(53215,4);
+T(:,1:3) = shape; 
+T = T * yaw_matrix(bita);
+shape = T(:,1:3);
+[normal, normalf] = compute_normal(shape.', face);
 
 m1 = proj_T(1,1:3);  norm_m1 = norm(m1);
 m2 = proj_T(2,1:3);  norm_m2 = norm(m2);
@@ -9,9 +12,13 @@ temp = cross(m1/norm_m1,m2/norm_m2);
 
 vis = -normal' * temp';
 vis(find(vis<=0))=0;
+pcshow(shape);
 % vis(find(vis>0))=1;
 end
 
+function T = yaw_matrix(bita)
+   T = [cos(bita) 0 sin(bita) 0;0 1 0 0;-sin(bita) 0 cos(bita) 0;0 0 0 1];
+end
 
 function [normal,normalf] = compute_normal(vertex,face)
 
@@ -24,7 +31,7 @@ function [normal,normalf] = compute_normal(vertex,face)
 %
 %   Copyright (c) 2004 Gabriel Peyr?
 
-[vertex,face] = check_face_vertex(vertex,face);
+% [vertex,face] = check_face_vertex(vertex,face);
 
 nface = size(face,2);
 nvert = size(vertex,2);
