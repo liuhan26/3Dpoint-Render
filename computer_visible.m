@@ -1,10 +1,10 @@
 
-function [vis] = computer_visible(shape, face, proj_T, bita)
-T = ones(53215,4);
-T(:,1:3) = shape; 
-T = T * yaw_matrix(bita);
-shape = T(:,1:3);
-[normal, normalf] = compute_normal(shape.', face);
+function [vis] = computer_visible(shape, face, proj_T)
+% T = ones(size(shape,1),4);
+% T(:,1:3) = shape; 
+% T = T * yaw_matrix(bita);
+% shape = T(:,1:3);
+[normal, normalf] = compute_normal(shape.', face.');
 
 m1 = proj_T(1,1:3);  norm_m1 = norm(m1);
 m2 = proj_T(2,1:3);  norm_m2 = norm(m2);

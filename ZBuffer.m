@@ -23,8 +23,8 @@ maxx    = floor(max(x, [], 2));
 miny    = ceil (min(y, [], 2));
 maxy    = floor(max(y, [], 2));
 clear x y
-width = 400;
-height = 400;
+width = 640;
+height = 480;
 % Frustum culling
 minx    = max(1,        minx);
 maxx    = min(width,    maxx);
@@ -77,11 +77,11 @@ for i = 1: Nfaces
             
             for j = 1: length(pz)
                 
-                if pz(j) > zbuffer(py(j), px(j))
+                %if pz(j) > zbuffer(py(j), px(j))
                     zbuffer(py(j), px(j))   = pz(j);
                     fbuffer(py(j), px(j))   = i;
    
-                end
+                %end
             end
             
         end
